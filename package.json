@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "next dev",
+        "dev": "next dev -p 3001",
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
@@ -17,19 +17,24 @@
         "@types/react-dom": "18.2.7",
         "eslint": "8.46.0",
         "eslint-config-next": "13.4.12",
-        "next": "13.4.12",
+        "next": "13.5.4",
+        "next-auth": "^4.23.2",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "typescript": "5.1.6"
     },
     "devDependencies": {
         "@commitlint/cli": "^17.6.7",
+        "autoprefixer": "^10.4.15",
         "commitlint-config-cz": "^0.13.3",
         "commitlint-config-git-commit-emoji": "^1.0.0",
         "cz-customizable": "^7.0.0",
         "eslint-config-prettier": "^9.0.0",
         "husky": "^8.0.3",
+        "postcss": "^8.4.29",
         "prettier": "^3.0.0",
-        "sass": "^1.64.2"
+        "prettier-plugin-tailwindcss": "^0.5.4",
+        "sass": "^1.64.2",
+        "tailwindcss": "^3.3.3"
     }
 }
