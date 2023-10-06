@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route.ts';
+import { authOptions } from '@/app/options';
 
 export const metadata: Metadata = {
     title: 'Dashboard'
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default async function Dashboard() {
     const session = await getServerSession(authOptions);
     console.log(session);
-    const avatar = session.picture;
+    const avatar = session?.user?.image || '';
     return (
         <>
             <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
@@ -23,9 +23,9 @@ export default async function Dashboard() {
                                         <svg
                                             fill="none"
                                             className="relative h-5 w-5"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
                                             stroke="currentColor"
                                             viewBox="0 0 24 24"
                                         >
@@ -213,7 +213,7 @@ export default async function Dashboard() {
                                                     viewBox="0 0 2447.6 2452.5"
                                                     xmlns="http://www.w3.org/2000/svg"
                                                 >
-                                                    <g clip-rule="evenodd" fill-rule="evenodd">
+                                                    <g clipRule="evenodd" fillRule="evenodd">
                                                         <path
                                                             d="m897.4 0c-135.3.1-244.8 109.9-244.7 245.2-.1 135.3 109.5 245.1 244.8 245.2h244.8v-245.1c.1-135.3-109.5-245.1-244.9-245.3.1 0 .1 0 0 0m0 654h-652.6c-135.3.1-244.9 109.9-244.8 245.2-.2 135.3 109.4 245.1 244.7 245.3h652.7c135.3-.1 244.9-109.9 244.8-245.2.1-135.4-109.5-245.2-244.8-245.3z"
                                                             fill="#36c5f0"
