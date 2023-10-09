@@ -3,13 +3,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-export default function Nav() {
+export default function Nav(props) {
     const pathName = usePathname();
     return (
         <div className="relative my-4 ml-4 hidden h-screen w-80 shadow-lg lg:block">
             <div className="h-full rounded-2xl bg-white dark:bg-gray-700">
                 <div className="flex items-center justify-center pt-6">
                     <Image src="/cat.png" alt="Picture of the author" width={50} height={50} />
+                    <button
+                        class="rounded-md border p-2 outline-none  dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-100"
+                        onClick={props?.toggleDarkMode}
+                    >
+                        切换主题
+                    </button>
                 </div>
                 <nav className="mt-6">
                     <div>
@@ -17,9 +23,9 @@ export default function Nav() {
                             href="/dashboard"
                             className={`${
                                 pathName === '/dashboard'
-                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 '
+                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  transition-colors duration-200 hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase hover:text-blue-500 dark:text-gray-200`}
                         >
                             <span className="text-left">
                                 <svg
@@ -39,7 +45,7 @@ export default function Nav() {
                                 pathName === '/team'
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 '
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  transition-colors duration-200 hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase   hover:text-blue-500 dark:text-gray-200`}
                             href="/team"
                         >
                             <span className="text-left">
@@ -59,9 +65,9 @@ export default function Nav() {
                         <Link
                             className={`${
                                 pathName === '/project'
-                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 '
+                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  transition-colors duration-200 hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase    hover:text-blue-500 dark:text-gray-200`}
                             href="/project"
                         >
                             <span className="text-left">
@@ -83,7 +89,7 @@ export default function Nav() {
                                 pathName === '/notification'
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 '
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  transition-colors duration-200 hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase hover:text-blue-500 dark:text-gray-200`}
                             href="notification"
                         >
                             <span className="text-left">
@@ -106,7 +112,7 @@ export default function Nav() {
                                 pathName === '/personal'
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 '
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  transition-colors duration-200 hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase hover:text-blue-500 dark:text-gray-200`}
                             href="personal"
                         >
                             <span className="text-left">
@@ -128,7 +134,7 @@ export default function Nav() {
                                 pathName === '/setting'
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 text-blue-500 '
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  transition-colors duration-200 hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-thin uppercase  hover:text-blue-500 dark:text-gray-200`}
                             href="setting"
                         >
                             <span className="text-left">
