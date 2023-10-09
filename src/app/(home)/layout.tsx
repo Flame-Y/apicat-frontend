@@ -4,7 +4,9 @@ import { useState, useEffect } from 'react';
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     // 从localStorage中获取darkMode
     const [darkMode, setDarkMode] = useState(
-        typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('darkMode')) : false
+        typeof window !== 'undefined' && localStorage.getItem('darkMode') !== null
+            ? JSON.parse(localStorage.getItem('darkMode') || '')
+            : false
     );
     useEffect(() => {
         document.documentElement.classList.remove(darkMode ? 'light' : 'dark');
@@ -18,7 +20,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         let isDark: boolean;
 
-        const transition = document.startViewTransition(() => {
+        const transition = (document as any).startViewTransition(() => {
             const root = document.documentElement;
             isDark = root.classList.contains('dark');
             root.classList.remove(isDark ? 'dark' : 'light');

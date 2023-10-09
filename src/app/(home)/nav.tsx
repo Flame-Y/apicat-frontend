@@ -3,7 +3,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-export default function Nav(props) {
+export default function Nav(props: {
+    darkMode: boolean;
+    toggleDarkMode: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}) {
     const pathName = usePathname();
     return (
         <div className="relative my-4 ml-4 hidden h-screen w-80 shadow-lg lg:block">
@@ -11,7 +14,7 @@ export default function Nav(props) {
                 <div className="flex items-center justify-center pt-6">
                     <Image src="/cat.png" alt="Picture of the author" width={50} height={50} />
                     <button
-                        class="rounded-md border p-2 outline-none  dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-100"
+                        className="rounded-md border p-2 outline-none  dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-100"
                         onClick={props?.toggleDarkMode}
                     >
                         切换主题
