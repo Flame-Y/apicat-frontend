@@ -1,7 +1,9 @@
 'use client';
 import Nav from './nav';
 import { useState, useEffect } from 'react';
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+import { SessionProvider } from 'next-auth/react';
+
+export default function DashboardLayout({ children, session }: { children: React.ReactNode; session: any }) {
     // 从localStorage中获取darkMode
     const [darkMode, setDarkMode] = useState(
         typeof window !== 'undefined' && localStorage.getItem('darkMode') !== null
@@ -45,7 +47,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     }
 
     return (
-        <>
+        <SessionProvider session={session}>
             <main className="relative h-screen overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800">
                 <div className="flex items-start justify-between">
                     <Nav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
@@ -54,6 +56,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     </div>
                 </div>
             </main>
-        </>
+        </SessionProvider>
     );
 }

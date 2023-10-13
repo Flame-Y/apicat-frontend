@@ -1,16 +1,27 @@
+'use client';
 import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getServerSession } from 'next-auth/next';
+import { useSession, signOut } from 'next-auth/react';
 import { authOptions } from '@/app/options';
 
-export const metadata: Metadata = {
-    title: 'Dashboard'
-};
-export default async function Dashboard() {
-    const session = await getServerSession(authOptions);
-    console.log(session);
-    const avatar = session?.user?.image || '';
+export default function Dashboard() {
+    const { data: session } = useSession();
+    console.log('session', session);
+    const avatar =
+        (session?.user as { image?: string; avatar?: string })?.image ||
+        (session?.user as { image?: string; avatar?: string })?.avatar ||
+        '';
+    const username =
+        (session as { name?: string; user?: { name?: string } })?.name ||
+        (session as { name?: string; user?: { name?: string } })?.user?.name ||
+        '';
+    async function toSignOut() {
+        //todo: 二次确认是否退出登录
+        await signOut();
+        window.location.href = '/login';
+    }
     return (
         <>
             <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
@@ -50,13 +61,15 @@ export default async function Dashboard() {
                                 </div>
                             </div>
                             <div className="relative ml-5 mr-4 flex w-1/4 items-center justify-end p-1 sm:right-auto sm:mr-0">
+                                <div className="relative mr-4 flex items-center">{username}</div>
                                 <Link href="#" className="relative block">
                                     <Image
-                                        alt="??"
+                                        alt="avatar"
                                         src={avatar}
                                         className="mx-auto h-10 w-10 rounded-full object-cover "
                                         width={200}
                                         height={200}
+                                        onClick={toSignOut}
                                     />
                                 </Link>
                             </div>
