@@ -8,7 +8,9 @@ export default function Page() {
     const [password, setPassword] = useState('');
     const githubLogin = async () => {
         signIn('github', { callbackUrl: '/' });
-        //查询数据库中是否有该用户邮箱
+        // const res = await GithubLogin();
+        // console.log(res);
+        //TODO: 查询数据库中是否有该用户邮箱
     };
     const toLogin = async () => {
         signIn('credentials', {

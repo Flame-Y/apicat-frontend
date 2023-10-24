@@ -1,14 +1,14 @@
 'use client';
-import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getServerSession } from 'next-auth/next';
 import { useSession, signOut } from 'next-auth/react';
-import { authOptions } from '@/app/options';
+import { useEffect } from 'react';
+import { GetInfoAPI } from '@/app/api/user/api';
 
 export default function Dashboard() {
     const { data: session } = useSession();
-    console.log('session', session);
+    const token = session?.accessToken;
+    // console.log('session', session);
     const avatar =
         (session?.user as { image?: string; avatar?: string })?.image ||
         (session?.user as { image?: string; avatar?: string })?.avatar ||
@@ -17,11 +17,21 @@ export default function Dashboard() {
         (session as { name?: string; user?: { name?: string } })?.name ||
         (session as { name?: string; user?: { name?: string } })?.user?.name ||
         '';
+    async function getInfo(token: string) {
+        const res = await GetInfoAPI(token);
+        console.log('res', res);
+    }
     async function toSignOut() {
-        //todo: 二次确认是否退出登录
+        //TODO: 二次确认是否退出登录
         await signOut();
         window.location.href = '/login';
     }
+
+    useEffect(() => {
+        if (token) {
+            getInfo(token);
+        }
+    }, [token]);
     return (
         <>
             <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
