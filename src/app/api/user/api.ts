@@ -1,5 +1,5 @@
 async function GetInfoAPI(token: string): Promise<any> {
-    const res = await fetch(`http://localhost:3000/user/info`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/user/info`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
