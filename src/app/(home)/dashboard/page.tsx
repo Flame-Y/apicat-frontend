@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { GetInfoAPI } from '@/app/api/user/api';
 
 export default function Dashboard() {
-    const { data: session } = useSession();
+    const { data: session }: { data: any } = useSession();
     const token = session?.accessToken;
     // console.log('session', session);
     const avatar =
@@ -34,7 +34,7 @@ export default function Dashboard() {
     }, [token]);
     return (
         <>
-            <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
+            <div className="flex h-screen w-full flex-col  pl-0  md:space-y-4 md:p-4">
                 <header className="z-40 h-16 w-full items-center rounded-2xl bg-white shadow-lg dark:bg-gray-700">
                     <div className="flex-center relative z-20 mx-auto flex h-full flex-col justify-center px-3">
                         <div className="lg:max-w-68 relative flex w-full items-center pl-1 sm:ml-0 sm:pr-2">
@@ -86,7 +86,7 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </header>
-                <div className="h-screen overflow-auto pb-24 pl-2 pr-2 pt-2 md:pl-0 md:pr-0 md:pt-0">
+                <div className="overflow-auto pl-2 pr-2 pt-2 md:pl-0 md:pr-0 md:pt-0">
                     <div className="flex flex-col flex-wrap sm:flex-row ">
                         <div className="w-full sm:w-1/2 xl:w-1/3">
                             <div className="mb-4">
