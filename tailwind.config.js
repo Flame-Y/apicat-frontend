@@ -10,7 +10,11 @@ module.exports = {
     ],
     darkMode: 'class',
     theme: {
-        extend: {}
+        extend: {
+            fontFamily: {
+                novecento: ['var(--font-novecento)']
+            }
+        }
     },
     plugins: []
 };

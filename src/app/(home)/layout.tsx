@@ -1,5 +1,5 @@
 'use client';
-import Nav from './nav';
+import Nav from '../components/nav';
 import { useState, useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
 
@@ -10,6 +10,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             ? JSON.parse(localStorage.getItem('darkMode') || '')
             : false
     );
+
     useEffect(() => {
         document.documentElement.classList.remove(darkMode ? 'light' : 'dark');
         document.documentElement.classList.add(darkMode ? 'dark' : 'light');
@@ -48,14 +49,16 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     return (
         <SessionProvider>
-            <main className="relative h-screen overflow-hidden rounded-2xl bg-gray-100 dark:bg-gray-800">
-                <div className="flex items-start justify-between">
-                    <Nav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-                    <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
-                        <section>{children}</section>
+            <div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] dark:bg-gray-800">
+                <main className="relative h-screen overflow-hidden rounded-2xl">
+                    <div className="flex items-start justify-between">
+                        <Nav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+                        <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
+                            <section>{children}</section>
+                        </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
         </SessionProvider>
     );
 }

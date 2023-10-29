@@ -4,15 +4,17 @@ import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
 export default function Page() {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const githubLogin = async () => {
         signIn('github', { callbackUrl: '/' });
-        //查询数据库中是否有该用户邮箱
+        // const res = await GithubLogin();
+        // console.log(res);
+        //TODO: 查询数据库中是否有该用户邮箱
     };
     const toLogin = async () => {
         signIn('credentials', {
-            username,
+            email,
             password,
             callbackUrl: '/'
         });
@@ -54,8 +56,8 @@ export default function Page() {
                                 id="sign-in-email"
                                 className=" w-full flex-1 appearance-none rounded-r-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-700 placeholder-gray-400 shadow-sm transition duration-200 ease-in focus:border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                 placeholder="Your email"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                     </div>
@@ -110,7 +112,7 @@ export default function Page() {
                     className="inline-flex items-center text-center text-xs font-thin text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white"
                 >
                     <Link className="ml-2" href="/register">
-                        You don&#x27;t have an account?
+                        未有账户？点击注册
                     </Link>
                 </a>
             </div>

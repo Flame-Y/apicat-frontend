@@ -93,8 +93,8 @@ export default function Page() {
                     target="_blank"
                     className="inline-flex items-center text-center text-xs font-thin text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white"
                 >
-                    <Link className="ml-2" href="/register">
-                        You don&#x27;t have an account?
+                    <Link className="ml-2" href="/login">
+                        已有账户？点击登录
                     </Link>
                 </a>
             </div>
