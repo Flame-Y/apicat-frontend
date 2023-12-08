@@ -4,15 +4,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 export default function Nav(props: {
-    darkMode: boolean;
     toggleDarkMode: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }) {
     const pathName = usePathname();
     return (
-        <div className="relative my-4 ml-4 hidden h-screen w-80 shadow-lg lg:block">
-            <div className="h-full rounded-2xl bg-white dark:bg-gray-700">
+        <div className="relative  hidden h-screen w-80 shadow-lg lg:block">
+            <div className="h-full bg-white dark:bg-gray-700">
                 <div className="flex items-center justify-center pt-6">
-                    <Image src="/cat.png" alt="logo" width={50} height={50} />
+                    <Image src="/cat.png" alt="logo" width={50} height={50} priority={true} />
                     <button
                         className="rounded-md border p-2 outline-none  dark:border-gray-900/50 dark:bg-gray-700 dark:text-gray-100"
                         onClick={props?.toggleDarkMode}
@@ -29,7 +28,7 @@ export default function Nav(props: {
                                 pathName === '/dashboard'
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
-                            } font-novecento my-2 flex w-full items-center justify-start p-4  uppercase hover:text-blue-500 dark:text-gray-200`}
+                            } my-2 flex w-full items-center justify-start p-4 font-novecento  hover:text-blue-500 dark:text-gray-200`}
                         >
                             <span className="text-left">
                                 <svg
@@ -47,7 +46,7 @@ export default function Nav(props: {
                         <Link
                             className={`${
                                 pathName === '/team'
-                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 '
+                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
                             } my-2 flex w-full items-center justify-start p-4 uppercase hover:text-blue-500 dark:text-gray-200`}
                             href="/team"
@@ -68,7 +67,7 @@ export default function Nav(props: {
                         </Link>
                         <Link
                             className={`${
-                                pathName === '/project'
+                                pathName.match(/^\/project/)
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
                             } my-2 flex w-full items-center justify-start p-4 uppercase hover:text-blue-500 dark:text-gray-200`}
@@ -94,7 +93,7 @@ export default function Nav(props: {
                                     ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 '
                                     : 'text-gray-500'
                             } my-2 flex w-full items-center justify-start p-4 uppercase hover:text-blue-500 dark:text-gray-200`}
-                            href="notification"
+                            href="/notification"
                         >
                             <span className="text-left">
                                 <svg
@@ -114,10 +113,10 @@ export default function Nav(props: {
                         <Link
                             className={`${
                                 pathName === '/personal'
-                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 '
+                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
                             } my-2 flex w-full items-center justify-start p-4 uppercase hover:text-blue-500 dark:text-gray-200`}
-                            href="personal"
+                            href="/personal"
                         >
                             <span className="text-left">
                                 <svg
@@ -136,10 +135,10 @@ export default function Nav(props: {
                         <Link
                             className={`${
                                 pathName === '/setting'
-                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500'
+                                    ? 'border-r-4 border-blue-500 bg-gradient-to-r from-white to-blue-100 font-bold text-blue-500 dark:border-blue-900 dark:bg-gradient-to-r dark:from-black dark:to-blue-500 dark:text-gray-100'
                                     : 'text-gray-500'
-                            } my-2 flex w-full items-center justify-start p-4  uppercase  hover:text-blue-500 dark:text-gray-200`}
-                            href="setting"
+                            } my-2 flex w-full items-center justify-start p-4 uppercase hover:text-blue-500 dark:text-gray-200`}
+                            href="/setting"
                         >
                             <span className="text-left">
                                 <svg

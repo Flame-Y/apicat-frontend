@@ -1,20 +1,13 @@
 'use client';
 import Nav from '../components/nav';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-    // 从localStorage中获取darkMode
-    const [darkMode, setDarkMode] = useState(
-        typeof window !== 'undefined' && localStorage.getItem('darkMode') !== null
-            ? JSON.parse(localStorage.getItem('darkMode') || '')
-            : false
-    );
-
-    useEffect(() => {
-        document.documentElement.classList.remove(darkMode ? 'light' : 'dark');
-        document.documentElement.classList.add(darkMode ? 'dark' : 'light');
-    }, [darkMode]);
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined' && localStorage.getItem('theme') !== null)
+    //         if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+    // }, []);
     // 点击切换darkMode
     function toggleDarkMode(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         const x = event.clientX;
@@ -29,7 +22,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             root.classList.remove(isDark ? 'dark' : 'light');
             root.classList.add(isDark ? 'light' : 'dark');
             //存入localStorage
-            localStorage.setItem('darkMode', JSON.stringify(!isDark));
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
         });
 
         transition.ready.then(() => {
@@ -40,7 +33,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 },
                 {
                     duration: 500,
-                    easing: 'ease-in',
+                    easing: 'ease-in-out',
                     pseudoElement: isDark ? '::view-transition-old(root)' : '::view-transition-new(root)'
                 }
             );
@@ -49,11 +42,52 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
     return (
         <SessionProvider>
+            <script
+                dangerouslySetInnerHTML={{
+                    __html: `
+                (function () {
+                  function setTheme(newTheme) {
+                    window.__theme = newTheme;
+                    if (newTheme === 'dark') {
+                      document.documentElement.classList.add('dark');
+                    } else if (newTheme === 'light') {
+                      document.documentElement.classList.remove('dark');
+                    }
+                  }
+
+                  var preferredTheme;
+                  try {
+                    preferredTheme = localStorage.getItem('theme');
+                  } catch (err) { }
+
+                  window.__setPreferredTheme = function(newTheme) {
+                    preferredTheme = newTheme;
+                    setTheme(newTheme);
+                    try {
+                      localStorage.setItem('theme', newTheme);
+                    } catch (err) { }
+                  };
+
+                  var initialTheme = preferredTheme;
+                  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+                  if (!initialTheme) {
+                    initialTheme = darkQuery.matches ? 'dark' : 'light';
+                  }
+                  setTheme(initialTheme);
+                  darkQuery.addEventListener('change', function (e) {
+                    if (!preferredTheme) {
+                      setTheme(e.matches ? 'dark' : 'light');
+                    }
+                  });
+                })();
+              `
+                }}
+            />
             <div className="absolute top-0 z-[-2] h-screen w-screen bg-white bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))] dark:bg-gray-800">
                 <main className="relative h-screen overflow-hidden rounded-2xl">
                     <div className="flex items-start justify-between">
-                        <Nav darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-                        <div className="flex w-full flex-col pl-0 md:space-y-4 md:p-4">
+                        <Nav toggleDarkMode={toggleDarkMode} />
+                        <div className="flex w-full flex-col pl-0 md:space-y-4 ">
                             <section>{children}</section>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className={`${novecento.variable}`}>
+        <html lang="en" className={`${novecento.variable}`} suppressHydrationWarning={true}>
             <body>{children}</body>
         </html>
     );
